@@ -23,7 +23,7 @@ limitations under the License.
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: openvswitch-db
+  name: {{ .Release.Name }}-openvswitch-db
   labels:
 {{ tuple $envAll "openvswitch" "openvswitch-vswitchd-db" | include "helm-toolkit.snippets.kubernetes_metadata_labels" | indent 4 }}
 spec:
