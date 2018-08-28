@@ -1,0 +1,79 @@
+# Copyright 2018 The SONA Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+clusterman:
+  replicaCount: 1
+
+  node_selector:
+    key: null
+    value: null
+
+  image:
+    repository: sangho/clusterman
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  port:
+    rest: 9191
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+
+noti:
+  image:
+    repository: appropriate/curl
+    tag: latest
+    pullPolicy: IfNotPresent
+  uri: clusterman-service
+
+
+openstack:
+  keystone:
+    version: v3
+    port: 80
+    endpoint: keystone/v3
+  project: admin
+  user: admin
+  password: password
+
+
+onos:
+  replicaCount: 3
+
+  hostNetwork: false
+
+  node_selector:
+    key: null
+    value: null
+
+  image:
+    repository: opensona/onos-sona-nightly-docker
+    tag: stable
+    pullPolicy: IfNotPresent
+
+  port:
+    openflow: 6653
+    ovsdb: 6640
+    onos_web: 8181
+    onos_ssh: 8101
+    onos_cluster: 9876
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+

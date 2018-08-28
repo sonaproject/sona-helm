@@ -1,0 +1,38 @@
+{{/*
+Copyright 2018 The SONA Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sona-service
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    run: "{{ .Release.Name }}-sona-service"
+spec:
+  ports:
+  - port: {{ .Values.onos.port.onos_ssh }}
+    name: karaf
+  - port: {{ .Values.onos.port.onos_web }}
+    name: onos-rest
+  - port: {{ .Values.onos.port.onos_cluster }}
+    name: cluster
+  - port: {{ .Values.onos.port.ovsdb }}
+    name: ovs
+  - port: {{ .Values.onos.port.openflow }}
+    name: openflow
+  selector:
+    run: "{{ .Release.Name }}-sona"
+

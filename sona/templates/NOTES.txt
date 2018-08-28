@@ -1,0 +1,42 @@
+Please check if SONA has been deployed successfully or not
+
+Log in to one of ONOS using ssh as following
+
+ ssh -p 8101 karaf@sona-service
+
+Check if nodes ONOS CLI commands show that all node status are READY.
+
+$ kubectl get pods -o wide
+NAME                     READY     STATUS    RESTARTS   AGE       IP          NODE
+onos-sona-clusterman-0   1/1       Running   0          1m        10.1.1.2    node2
+onos-sona-sona-0         1/1       Running   0          1m        10.1.1.12   node1
+onos-sona-sona-1         1/1       Running   0          1m        10.1.1.2    node2
+onos-sona-sona-2         1/1       Running   0          48s       10.1.1.3    node3
+ubuntu@node1:~$
+ubuntu@node1:~$ ssh -p 8101 karaf@10.1.1.3
+The authenticity of host '[10.1.1.3]:8101 ([10.1.1.3]:8101)' can't be established.
+RSA key fingerprint is SHA256:tq2HEeDPJnPwl/jkRX1tZ7VgtqV8OuZTPHGxKUAb2EY.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '[10.1.1.3]:8101' (RSA) to the list of known hosts.
+Password authentication
+Password:
+Welcome to Open Network Operating System (ONOS)!
+    ____  _  ______  ____
+   / __ \/ |/ / __ \/ __/
+  / /_/ /    / /_/ /\ \
+  \____/_/|_/\____/___/
+
+Documentation: wiki.onosproject.org
+Tutorials:     tutorials.onosproject.org
+Mailing lists: lists.onosproject.org
+
+Come help out! Find out how at: contribute.onosproject.org
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown ONOS.
+
+onos> nodes
+id=onos-sona-sona-0, address=10.1.1.12:9876, state=READY, version=1.13.2, updated=40s ago
+id=onos-sona-sona-1, address=10.1.1.2:9876, state=READY, version=1.13.2, updated=39s ago
+id=onos-sona-sona-2, address=10.1.1.3:9876, state=READY, version=1.13.2, updated=36s ago *
