@@ -72,7 +72,7 @@ spec:
       volumes:
         - name: openvswitch-bin
           configMap:
-            name: openvswitch-bin
+            name: {{ .Release.Name }}-openvswitch-bin
             defaultMode: 0555
         - name: varlibopenvswitch
           emptyDir: {}
