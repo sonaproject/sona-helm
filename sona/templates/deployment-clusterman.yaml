@@ -45,7 +45,7 @@ spec:
         image: {{ .Values.clusterman.image.repository }}:{{ .Values.clusterman.image.tag }}
         imagePullPolicy: {{ .Values.clusterman.image.pullPolicy }}
         ports:
-        - containerPort: 9191
+        - containerPort: {{ .Values.clusterman.port.rest }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 

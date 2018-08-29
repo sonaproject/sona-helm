@@ -45,8 +45,8 @@ spec:
         - name: noti-ip
           image: {{ .Values.noti.image.repository }}:{{ .Values.noti.image.tag }}
           imagePullPolicy: {{ .Values.noti.image.pullPolicy }}
-          command: ['sh', '-c','sleep 3; curl -X POST {{.Values.noti.uri}}:9191/leave -d "{\"nodename\":\"$MY_POD_NAME\",\"nodeip\":\"\"}";
-          sleep 6; curl -X POST {{.Values.noti.uri}}:9191/join -d "{\"nodename\":\"$MY_POD_NAME\",\"nodeip\":\"$MY_POD_IP\"}"']
+          command: ['sh', '-c','sleep 3; curl -X POST {{.Values.noti.uri}}:{{ .Values.clusterman.port.rest }}/leave -d "{\"nodename\":\"$MY_POD_NAME\",\"nodeip\":\"\"}";
+          sleep 6; curl -X POST {{.Values.noti.uri}}:{{ .Values.clusterman.port.rest }}/join -d "{\"nodename\":\"$MY_POD_NAME\",\"nodeip\":\"$MY_POD_IP\"}"']
           env:
             - name: MY_POD_IP
               valueFrom:
@@ -86,7 +86,7 @@ spec:
             - containerPort: {{ .Values.onos.port.onos_cluster }}
           env:
             - name: JAVA_TOOL_OPTIONS
-              value: "-Dfile.encoding=UTF8 -Donos.cluster.metadata.uri=http://{{.Values.noti.uri}}:9191/cluster.json"
+              value: "-Dfile.encoding=UTF8 -Donos.cluster.metadata.uri=http://{{.Values.noti.uri}}:{{ .Values.clusterman.port.rest }}/cluster.json"
             - name: SONA_POD_IP
               valueFrom:
                 fieldRef:

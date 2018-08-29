@@ -23,12 +23,12 @@ clusterman:
     value: null
 
   image:
-    repository: sangho/clusterman
+    repository: opensona/clustermanager
     tag: latest
     pullPolicy: IfNotPresent
 
   port:
-    rest: 9191
+    rest: 9292
 
   nameOverride: ""
   fullnameOverride: ""
