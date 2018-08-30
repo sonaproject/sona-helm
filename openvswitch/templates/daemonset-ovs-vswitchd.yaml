@@ -17,7 +17,7 @@ limitations under the License.
 {{- if .Values.manifests.daemonset_ovs_vswitchd }}
 {{- $envAll := . }}
 
-{{- $serviceAccountName := "openvswitch-vswitchd" }}
+{{- $serviceAccountName := .Release.Name + "openvswitch-vswitchd" }}
 {{ tuple $envAll "vswitchd" $serviceAccountName | include "helm-toolkit.snippets.kubernetes_pod_rbac_serviceaccount" }}
 ---
 apiVersion: apps/v1
@@ -38,7 +38,7 @@ spec:
       annotations:
         configmap-bin-hash: {{ tuple "configmap-bin.yaml" . | include "helm-toolkit.utils.hash" }}
     spec:
-      serviceAccountName: {{ .Release.Name }}-{{ $serviceAccountName }}
+      serviceAccountName: {{ $serviceAccountName }}
       nodeSelector:
         {{ .Values.labels.ovs.node_selector_key }}: {{ .Values.labels.ovs.node_selector_value }}
       dnsPolicy: ClusterFirstWithHostNet
