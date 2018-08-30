@@ -60,7 +60,7 @@ spec:
               readOnly: true
         - name: compute-node-registration-sona
           image: appropriate/curl
-          command: ['sh', '-c', 'curl --user onos:rocks -X POST -H "Content-Type:application/json" -d "
+          command: ['sh', '-c', 'sleep 5; curl --user onos:rocks -X POST -H "Content-Type:application/json" -d "
             { \"nodes\": [
               {\"hostname\" : \"{{ .Values.labels.ovs.node_selector_value }}-$OVS_NODE_NAME\",
 
