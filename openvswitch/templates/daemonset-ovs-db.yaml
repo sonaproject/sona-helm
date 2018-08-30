@@ -17,7 +17,7 @@ limitations under the License.
 {{- if .Values.manifests.daemonset_ovs_db }}
 {{- $envAll := . }}
 
-{{- $serviceAccountName := .Release.Name + "openvswitch-db" }}
+{{- $serviceAccountName := .Release.Name "openvswitch-db" }}
 {{ tuple $envAll "db" $serviceAccountName | include "helm-toolkit.snippets.kubernetes_pod_rbac_serviceaccount" }}
 ---
 apiVersion: apps/v1
