@@ -68,7 +68,7 @@ spec:
             \"managementIp\" : \"127.0.0.1\",
             \"endpoint\" : \"{{ .Values.openstack.keystone.endpoint }}\",
             \"authentication\" : {
-                    \"version\" : \" {{ .Values.openstack.keystone.version }} \",
+                    \"version\" : \"{{ .Values.openstack.keystone.version }}\",
                     \"port\" : {{ .Values.openstack.keystone.port }},
                     \"protocol\" : \"HTTP\",
                     \"project\" : \"{{ .Values.openstack.project }}\",
