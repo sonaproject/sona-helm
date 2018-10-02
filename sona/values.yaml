@@ -28,7 +28,7 @@ clusterman:
     pullPolicy: Always
 
   port:
-    rest: 9292
+    rest: 9393
 
   nameOverride: ""
   fullnameOverride: ""
