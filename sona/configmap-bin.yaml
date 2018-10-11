@@ -1,0 +1,11 @@
+{{- if .Values.manifests.configmap_bin }}
+{{- $envAll := . }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-sona-bin
+data:
+  push-config.sh: |
+{{ tuple "bin/_push-config.sh.tpl" . | include "helm-toolkit.utils.template" | indent 4 }}
+{{- end }}
