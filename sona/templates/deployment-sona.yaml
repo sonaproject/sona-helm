@@ -82,7 +82,7 @@ spec:
       volumes:
               - name: sona-bin
                 configMap:
-                  name: {{ .Release.Name }}-sona-bin
+                  name: sona-bin
                   defaultMode: 0555
       dnsPolicy: ClusterFirst
       restartPolicy: Always

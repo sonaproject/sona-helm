@@ -76,4 +76,5 @@ onos:
   nameOverride: ""
   fullnameOverride: ""
 
-
+manifests:
+  configmap_bin: true
