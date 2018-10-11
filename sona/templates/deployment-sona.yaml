@@ -72,6 +72,11 @@ spec:
             - containerPort: {{ .Values.onos.port.onos_web }}
             - containerPort: {{ .Values.onos.port.onos_ssh }}
             - containerPort: {{ .Values.onos.port.onos_cluster }}
+          volumeMounts:
+            - name: sona-bin
+              mountPath: /tmp/push-config.sh
+              subPath: push-config.sh
+              readOnly: true
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-Dfile.encoding=UTF8 -Donos.cluster.metadata.uri=http://{{.Values.noti.uri}}:{{ .Values.clusterman.port.rest }}/cluster.json"
