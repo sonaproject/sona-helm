@@ -18,7 +18,7 @@ httpUrl='curl -i --user onos:rocks -H "Content-Type:application/json" -d "{ \"no
 resp="$(eval $httpUrl)";
 echo "resp:" "$resp"
 if [ "$resp" -eq "201" ]; then
-    echo "success"; exit 1;
+    echo "success"; exit 0;
 else
-    echo "failure"; exit 1;
+    echo "failure"; exit 0;
 fi
