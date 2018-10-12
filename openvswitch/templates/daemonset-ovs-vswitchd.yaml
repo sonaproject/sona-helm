@@ -59,6 +59,11 @@ spec:
               mountPath: /mnt/host-rootfs
               readOnly: true
         - name: compute-node-registration-sona
+          securityContext:
+            capabilities:
+              add:
+                - SYS_MODULE
+            runAsUser: 0
           image: appropriate/curl
           command:
             - /tmp/push-config.sh
