@@ -60,18 +60,8 @@ spec:
               readOnly: true
         - name: compute-node-registration-sona
           image: appropriate/curl
-          command: ['sh', '-c', 'sleep 5; curl --user onos:rocks -X POST -H "Content-Type:application/json" -d "
-            { \"nodes\": [
-              {\"hostname\" : \"{{ .Values.labels.ovs.node_selector_value }}-$OVS_NODE_NAME\",
-
-               \"type\" : \"{{ .Values.sona.node_type }}\",
-               \"managementIp\" : \"$OVS_POD_IP\",
-               \"dataIp\" : \"$OVS_POD_IP\"
-{{ if .Values.sona.uplink_port }}
-               ,\"uplinkPort\" : \"{{ .Values.sona.uplink_port }}\"
-{{ end }}
-              }]}"
-            http://sona-service:8181/onos/openstacknode/configure']
+          command:
+            - /tmp/push-config.sh
           env:
            - name: OVS_POD_IP
              valueFrom:
@@ -113,6 +103,10 @@ spec:
               readOnly: true
             - name: run
               mountPath: /run
+            - name: sona-bin
+              mountPath: /tmp/push-config.sh
+              subPath: push-config.sh
+              readOnly: true
       volumes:
         - name: openvswitch-bin
           configMap:
@@ -124,4 +118,8 @@ spec:
         - name: host-rootfs
           hostPath:
             path: /
+        - name: sona-bin
+          configMap:
+          name: sona-bin
+          defaultMode: 0555
 {{- end }}
