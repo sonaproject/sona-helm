@@ -77,7 +77,7 @@ spec:
                fieldRef:
                  fieldPath: spec.nodeName
           volumeMounts:
-            - name: sona-bin
+            - name: openvswitch-bin
               mountPath: /tmp/push-config.sh
               subPath: push-config.sh
               readOnly: true
@@ -124,8 +124,4 @@ spec:
         - name: host-rootfs
           hostPath:
             path: /
-        - name: sona-bin
-          configMap:
-          name: sona-bin
-          defaultMode: 0555
 {{- end }}
