@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 {{/*
 Copyright 2018 The SONA Authors.
 
@@ -15,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-sleep 10
+sleep 5
 export SONA_POD_IP=sona-service
 httpUrl='curl -i --user onos:rocks -H "Content-Type:application/json" -d "{ \"nodes\": [
               {\"hostname\" : \"{{ .Values.labels.ovs.node_selector_value }}-$OVS_NODE_NAME\",
