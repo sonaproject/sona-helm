@@ -40,12 +40,25 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       initContainers:
-        - name: compute-node-registration-sona
+{{ tuple $envAll "vswitchd" list | include "helm-toolkit.snippets.kubernetes_entrypoint_init_container" | indent 8 }}
+        - name: openvswitch-vswitchd-modules
+{{ tuple $envAll "openvswitch_vswitchd" | include "helm-toolkit.snippets.image" | indent 10 }}
           securityContext:
             capabilities:
               add:
                 - SYS_MODULE
             runAsUser: 0
+          command:
+            - /tmp/openvswitch-vswitchd-init-modules.sh
+          volumeMounts:
+            - name: openvswitch-bin
+              mountPath: /tmp/openvswitch-vswitchd-init-modules.sh
+              subPath: openvswitch-vswitchd-init-modules.sh
+              readOnly: true
+            - name: host-rootfs
+              mountPath: /mnt/host-rootfs
+              readOnly: true
+        - name: compute-node-registration-sona
           image: appropriate/curl
           command:
             - /tmp/push-config.sh
@@ -62,6 +75,9 @@ spec:
             - name: openvswitch-bin
               mountPath: /tmp/push-config.sh
               subPath: push-config.sh
+              readOnly: true
+            - name: host-rootfs
+              mountPath: /mnt/host-rootfs
               readOnly: true
       containers:
         - name: openvswitch-vswitchd
