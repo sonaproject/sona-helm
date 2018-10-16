@@ -58,29 +58,6 @@ spec:
             - name: host-rootfs
               mountPath: /mnt/host-rootfs
               readOnly: true
-        - name: compute-node-registration-sona
-          securityContext:
-            capabilities:
-              add:
-                - SYS_MODULE
-            runAsUser: 0
-          image: appropriate/curl
-          command:
-            - /tmp/push-config.sh
-          env:
-           - name: OVS_POD_IP
-             valueFrom:
-               fieldRef:
-                 fieldPath: status.podIP
-           - name: OVS_NODE_NAME
-             valueFrom:
-               fieldRef:
-                 fieldPath: spec.nodeName
-          volumeMounts:
-            - name: openvswitch-bin
-              mountPath: /tmp/push-config.sh
-              subPath: push-config.sh
-              readOnly: true
       containers:
         - name: openvswitch-vswitchd
 {{ tuple $envAll "openvswitch_vswitchd" | include "helm-toolkit.snippets.image" | indent 10 }}

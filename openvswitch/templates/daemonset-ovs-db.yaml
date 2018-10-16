@@ -50,13 +50,32 @@ spec:
           command:
             - /tmp/openvswitch-db-server.sh
             - start
+          readinessProbe:
+            exec:
+              command:
+                - /tmp/push-config.sh
+            initialDelaySeconds: 5
+            periodSeconds: 5
           lifecycle:
             preStop:
               exec:
                 command:
                   - /tmp/openvswitch-db-server.sh
                   - stop
+          env:
+            - name: OVS_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: OVS_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           volumeMounts:
+            - name: openvswitch-bin
+              mountPath: /tmp/push-config.sh
+              subPath: push-config.sh
+              readOnly: true
             - name: openvswitch-bin
               mountPath: /tmp/openvswitch-db-server.sh
               subPath: openvswitch-db-server.sh
