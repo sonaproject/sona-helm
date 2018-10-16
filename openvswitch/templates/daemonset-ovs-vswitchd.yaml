@@ -59,9 +59,9 @@ spec:
               mountPath: /mnt/host-rootfs
               readOnly: true
         - name: compute-node-registration-sona
-          image: appropriate/curl
+          image: {{ .Values.onos.image.repository }}:{{ .Values.onos.image.tag }}
           command:
-            - ls /; ls /tmp
+            - /tmp/push-config.sh
           env:
            - name: OVS_POD_IP
              valueFrom:
