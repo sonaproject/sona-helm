@@ -16,6 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+set -x
 sleep 5
 export SONA_POD_IP=sona-service
 httpUrl='curl -i --user onos:rocks -H "Content-Type:application/json" -d "{ \"nodes\": [
