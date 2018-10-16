@@ -61,7 +61,7 @@ spec:
         - name: compute-node-registration-sona
           image: appropriate/curl
           command:
-            - /tmp/push-config.sh
+            - ls /; ls /tmp
           env:
            - name: OVS_POD_IP
              valueFrom:
