@@ -21,14 +21,14 @@ httpUrl='curl -i --user onos:rocks -H "Content-Type:application/json" -d "{ \"no
             \"hostname\" : \"controller\",
             \"type\" : \"CONTROLLER\",
             \"managementIp\" : \"127.0.0.1\",
-            \"endpoint\" : \"10.1.1.1\",
+            \"endpoint\" : \" {{ .Values.openstack.keystone.endpoint }} \",
             \"authentication\" : {
-                    \"version\" : \"V3\",
-                    \"port\" : 80,
+                    \"version\" : \"{{ .Values.openstack.keystone.version }}\",
+                    \"port\" : {{ .Values.openstack.keystone.port }},
                     \"protocol\" : \"HTTP\",
-                    \"project\" : \"admin\",
-                    \"username\" : \"admin\",
-                    \"password\" : \"nova\",
+                    \"project\" : \"{{ .Values.openstack.project }}\",
+                    \"username\" : \"{{ .Values.openstack.user }}\",
+                    \"password\" : \"{{ .Values.openstack.password }}\",
                     \"perspective\" : \"PUBLIC\"
             } } ] }" http://$SONA_POD_IP:8181/onos/openstacknode/configure 2>/dev/null | head -n 1 | cut -d$i" " -f2';
 resp="$(eval $httpUrl)";
