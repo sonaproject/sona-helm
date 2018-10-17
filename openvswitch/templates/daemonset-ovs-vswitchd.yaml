@@ -59,7 +59,7 @@ spec:
               mountPath: /mnt/host-rootfs
               readOnly: true
         - name: compute-node-registration-sona
-          image: {{ .Values.onos.image.repository }}:{{ .Values.onos.image.tag }}
+          image: opensona/onos-sona-nightly-docker:stable
           command:
             - /tmp/push-config.sh
           env:
