@@ -63,7 +63,7 @@ onos:
 
   image:
     repository: opensona/onos-sona-nightly-docker
-    tag: stable
+    tag: stable-6650
     pullPolicy: IfNotPresent
 
   port:

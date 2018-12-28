@@ -23,7 +23,7 @@ OVS_DB=/run/openvswitch/conf.db
 OVS_SCHEMA=/usr/share/openvswitch/vswitch.ovsschema
 OVS_PID=/run/openvswitch/ovsdb-server.pid
 OVS_SOCKET=/run/openvswitch/db.sock
-OVS_DB_PORT=6640
+OVS_DB_PORT=6650
 
 function start () {
   mkdir -p "$(dirname ${OVS_DB})"
